@@ -14,6 +14,24 @@
 	<packaging>war</packaging>
 	<name>e-commerce-sideproject</name>
 	<description>my e-commerce side project</description>
+    <!--application.properties 的spring.profiles.active 對應下面的值就啟用 哪個properties-->
+	<profiles>
+		<!--dev-->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<activatedProperties>dev</activatedProperties>
+			</properties>
+		</profile>
+		<!--prod-->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<activatedProperties>prod</activatedProperties>
+			</properties>
+		</profile>
+	</profiles>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
