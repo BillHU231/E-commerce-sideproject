@@ -1,6 +1,5 @@
-package com.billhu.ecommercesideproject.restcontroller;
+package com.billhu.ecommercesideproject.controller;
 
-import com.billhu.ecommercesideproject.ECommerceSideprojectApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
