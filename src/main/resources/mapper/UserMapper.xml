@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--設定對應的mapper-->
+<mapper namespace="com.billhu.ecommercesideproject.dao.mapper.UserMapper">
+    <!--設定Mapper 和table欄位資料型態對應-->
+    <resultMap id="BaseResultMap" type="com.billhu.ecommercesideproject.dao.mapper.UserMapper">
+        <id column="user_id" jdbcType="varchar" property="userId"/>  <!--id -->
+    </resultMap>
+
+
+</mapper>
