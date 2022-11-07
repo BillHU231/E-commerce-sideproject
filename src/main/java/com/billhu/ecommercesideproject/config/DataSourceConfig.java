@@ -1,11 +1,14 @@
 package com.billhu.ecommercesideproject.config;
 
 import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -18,8 +21,14 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.billhu.ecommercesideproject.dao.mapper")
 public class DataSourceConfig {
 
+    @Primary
+    @Bean(name = "myDataSourceProperties")
+    public  DataSourceProperties dataSourceProperties(){
+        return new DataSourceProperties();
+    }
 
-    @Bean
+
+    @Bean(name = "myDataSource")
     @Primary
     public DataSource dataSource(DataSourceProperties properties){
         //hikari connection pool config
@@ -36,13 +45,15 @@ public class DataSourceConfig {
         hikariConfig.setConnectionTestQuery("SELECT 1"); //連線測試語法
         hikariConfig.setMaxLifetime(600*1000); //連線池連線生命週期
 
-        return hikariConfig.getDataSource();
+        return new HikariDataSource(hikariConfig);
     }
 
 
-    @Bean
+
+
+    @Bean(name = "mySqlSessionFactory")
     @Primary
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("myDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean= new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         return bean.getObject();
@@ -50,7 +61,7 @@ public class DataSourceConfig {
 
     @Bean
     @Primary
-    public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
+    public DataSourceTransactionManager dataSourceTransactionManager(@Qualifier("myDataSource")DataSource dataSource){
         return new DataSourceTransactionManager(dataSource);
     }
     @Bean

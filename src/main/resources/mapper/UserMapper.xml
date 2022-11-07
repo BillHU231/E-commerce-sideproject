@@ -3,9 +3,20 @@
 <!--設定對應的mapper-->
 <mapper namespace="com.billhu.ecommercesideproject.dao.mapper.UserMapper">
     <!--設定Mapper 和table欄位資料型態對應-->
-    <resultMap id="BaseResultMap" type="com.billhu.ecommercesideproject.dao.mapper.UserMapper">
-        <id column="user_id" jdbcType="varchar" property="userId"/>  <!--id -->
-    </resultMap>
+<!--    <resultMap id="BaseResultMap" type="com.billhu.ecommercesideproject.dao.entity.UserEntity">-->
+<!--        <id column="user_id" jdbcType="varchar" property="userId"/>  &lt;!&ndash;id &ndash;&gt;-->
+<!--        <result column="user_mail" jdbcType="varchar" property="userMail" />-->
+<!--        <result column="user_password" jdbcType="varchar" property="userPassword" />-->
+<!--        <result column="user_type" jdbcType="varchar" property="userType" />-->
+<!--        <result column="create_time" jdbcType="datetime" property="createTime" />-->
+<!--        <result column="modify_time" jdbcType="datetime" property="modifyTime" />-->
+<!--    </resultMap>-->
+
+<!--    <select id="findByMail" parameterType="java.lang.String" resultType="com.billhu.ecommercesideproject.dao.entity.UserEntity">-->
+<!--        SELECT *-->
+<!--        FROM user-->
+<!--        WHERE user_mail = #{mail}-->
+<!--    </select>-->
 
 
 </mapper>

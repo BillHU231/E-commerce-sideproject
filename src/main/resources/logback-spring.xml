@@ -57,5 +57,5 @@
     </root>
 
     <!-- 設定不同 class 的 Log 印出等級 -->
-    <logger name="com.albert.management" level="debug" />
+<!--    <logger name="com.billhu.ecommercesideproject.dao" level="INFO" />-->
 </configuration>
