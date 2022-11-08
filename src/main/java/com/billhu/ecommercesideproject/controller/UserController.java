@@ -1,12 +1,16 @@
 package com.billhu.ecommercesideproject.controller;
 
+import com.billhu.ecommercesideproject.model.LoginRequestModel;
+import com.billhu.ecommercesideproject.model.LoginResponseDTO;
 import com.billhu.ecommercesideproject.model.UserRequestModel;
 import com.billhu.ecommercesideproject.model.UserResponseDTO;
 import com.billhu.ecommercesideproject.service.UserLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +27,10 @@ public class UserController {
     UserLogic userLogic;
 
     @PostMapping(value = "/sing-out" ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponseDTO createUser(
+    public ResponseEntity<UserResponseDTO> createUser(
            @RequestBody @Valid UserRequestModel requestBody,
            BindingResult bindingResult) {  // BindingResult  為 validated 檢查的錯誤訊息
+
         String[] identityArray={"reseller","customer"};
         UserResponseDTO response =new UserResponseDTO();
         String message =null;
@@ -44,7 +49,7 @@ public class UserController {
             response.setMessage(message);
             log.info("invalid parameters received : status:{} message:{} ",status,message);
 
-            return  response;
+            return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
         //檢查身份是否輸入正確
         for(int i=0;i< identityArray.length;i++){
@@ -67,15 +72,29 @@ public class UserController {
                 response.setStatus(status);
                 response.setMessage(message);
                 log.info("invalid parameters received : status:{} message:{} ",status,message);
-                return  response;
+                return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
             }
 
         }
 
-        response=userLogic.createUser(requestBody);
+        return userLogic.register(requestBody);
+
+   }
+   @PostMapping("/login")
+   public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestModel model ,BindingResult bindingResult){
+
+        LoginResponseDTO response =new LoginResponseDTO();
+        log.info(" user log in {}",model.toString());
 
 
-        return response;
+        if(bindingResult.hasErrors()){
+            response.setStatus("9001");
+            response.setMessage(bindingResult.getFieldError().getDefaultMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        return null;
+
+
 
    }
 }

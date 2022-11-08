@@ -5,15 +5,17 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @ToString
 public class UserEntity {
-    @TableI
-    public String userId;
+
+    public Long userId;
     public String userMail;
     public String userPassword;
     public String userType;
-    public Date createTime;
-    public Date modifyTime;
+    public Timestamp createTime;
+    public Timestamp modifyTime;
 }
