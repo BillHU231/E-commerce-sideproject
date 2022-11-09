@@ -20,7 +20,15 @@ public interface UserMapper {
     public Long create (UserEntity user);
     @Select("SELECT * FROM users " +
             "WHERE user_mail = #{mail} AND user_password = #{password}")
-    public UserMapper findByMailAndPassWord(@Param("mail") String mail,@Param("password") String password);
+    @Results({
+            @Result(property = "userId" ,column = "user_id" ),
+            @Result(property = "userMail",column = "user_mail"),
+            @Result(property = "userPassword",column = "user_password"),
+            @Result(property = "userType",column = "user_type"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "modifyTime",column = "modify_time")
+    })
+    public UserEntity findByMailAndPassWord(@Param("mail") String mail,@Param("password") String password);
 
 
 }

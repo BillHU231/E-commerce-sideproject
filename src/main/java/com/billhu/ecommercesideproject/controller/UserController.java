@@ -1,5 +1,6 @@
 package com.billhu.ecommercesideproject.controller;
 
+import com.billhu.ecommercesideproject.config.JwtTokenUtil;
 import com.billhu.ecommercesideproject.model.LoginRequestModel;
 import com.billhu.ecommercesideproject.model.LoginResponseDTO;
 import com.billhu.ecommercesideproject.model.UserRequestModel;
@@ -25,6 +26,7 @@ public class UserController {
     private final static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
     UserLogic userLogic;
+
 
     @PostMapping(value = "/sing-out" ,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponseDTO> createUser(
@@ -92,7 +94,10 @@ public class UserController {
             response.setMessage(bindingResult.getFieldError().getDefaultMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return null;
+
+       return userLogic.login(model);
+
+
 
 
 

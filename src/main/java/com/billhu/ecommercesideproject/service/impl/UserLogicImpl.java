@@ -1,5 +1,6 @@
 package com.billhu.ecommercesideproject.service.impl;
 
+import com.billhu.ecommercesideproject.config.JwtTokenUtil;
 import com.billhu.ecommercesideproject.dao.entity.CustomerUserEntity;
 import com.billhu.ecommercesideproject.dao.entity.StoreUserEntity;
 import com.billhu.ecommercesideproject.dao.entity.UserEntity;
@@ -35,6 +36,8 @@ public class UserLogicImpl implements UserLogic {
     StoreUserMapper storeUserMapper;
     @Autowired
     CustomerUserMapper customerUserMapper;
+    @Autowired
+    JwtTokenUtil tokenUtil;
 
     /**
      * @Transactional 交易控制  propagationg事件的傳播行為  rollbackFor 發生什麼錯誤rollback
@@ -111,13 +114,35 @@ public class UserLogicImpl implements UserLogic {
     @Override
     public ResponseEntity<LoginResponseDTO> login(LoginRequestModel model) {
 
+        LoginResponseDTO response=new LoginResponseDTO();
+
         //檢查帳號是否存在
         String mail =model.getUserMail();
         String passWord = DigestUtils.md5DigestAsHex(model.getPassWord().getBytes());
-        userMapper.findByMailAndPassWord(mail,passWord);
+        UserEntity user= userMapper.findByMailAndPassWord(mail,passWord);
+        log.info("userMail {} password {}",mail,passWord);
+
+        if(user==null){
+            log.warn("mail {} validate user failed user " ,mail);
+            String status="9001";
+            String message=" the user mail or the password is incorrect ";
+            response.setStatus(status);
+            response.setMessage(message);
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        log.info("mail {} validate user success " ,mail);
+
+        //create token
+
+        String token= tokenUtil.generateToken(model);
+
+        response.setToken(token);
+        response.setStatus("2000");
+        response.setMessage("log in success");
 
 
-
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
