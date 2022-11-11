@@ -1,6 +1,5 @@
 package com.billhu.ecommercesideproject.controller;
 
-import com.billhu.ecommercesideproject.config.JwtTokenUtil;
 import com.billhu.ecommercesideproject.model.LoginRequestModel;
 import com.billhu.ecommercesideproject.model.LoginResponseDTO;
 import com.billhu.ecommercesideproject.model.UserRequestModel;
@@ -96,10 +95,6 @@ public class UserController {
         }
 
        return userLogic.login(model);
-
-
-
-
 
    }
 }

@@ -1,4 +1,4 @@
-package com.billhu.ecommercesideproject.config;
+package com.billhu.ecommercesideproject.util;
 
 import com.billhu.ecommercesideproject.model.LoginRequestModel;
 import io.jsonwebtoken.Jwts;
@@ -40,6 +40,8 @@ public class JwtTokenUtil implements Serializable { //表示序列化
         return doGenerateToken(claims,header,model.getUserMail());
     }
 
+
+
     private  String doGenerateToken(Map<String, Object> claims,Map<String,Object> header, String userMail) {
         RSAPrivateKey key =getPrivateKey();
 
@@ -79,6 +81,8 @@ public class JwtTokenUtil implements Serializable { //表示序列化
         return rsaPrivate;
 
     }
+
+
 
 
 }

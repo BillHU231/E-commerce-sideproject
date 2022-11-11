@@ -1,6 +1,6 @@
 package com.billhu.ecommercesideproject.service.impl;
 
-import com.billhu.ecommercesideproject.config.JwtTokenUtil;
+import com.billhu.ecommercesideproject.util.JwtTokenUtil;
 import com.billhu.ecommercesideproject.dao.entity.CustomerUserEntity;
 import com.billhu.ecommercesideproject.dao.entity.StoreUserEntity;
 import com.billhu.ecommercesideproject.dao.entity.UserEntity;

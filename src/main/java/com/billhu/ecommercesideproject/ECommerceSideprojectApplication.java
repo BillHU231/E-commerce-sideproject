@@ -4,8 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) //Spring boot 2.7 後Spring security 會autoconfiguration(自動配置) 要把它關閉
 public class ECommerceSideprojectApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ECommerceSideprojectApplication.class);
