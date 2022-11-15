@@ -1,8 +1,12 @@
 package com.billhu.ecommercesideproject.util;
 
+import com.billhu.ecommercesideproject.controller.UserController;
 import com.billhu.ecommercesideproject.model.LoginRequestModel;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -24,6 +28,7 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil implements Serializable { //表示序列化
 
+    private final static Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
     public static final long JWT_TOKEN_VALIDITY=1*60*60*1000; //設定JWT TOKEN有效時間
     public static final String PRIVATEKEYFILEPATH="classpath:sshKey/id_rsa.key";
 
@@ -80,6 +85,12 @@ public class JwtTokenUtil implements Serializable { //表示序列化
         }
         return rsaPrivate;
 
+    }
+
+
+
+    public String getMail(String token){
+        return (String) Jwts.parser().setSigningKey(getPrivateKey()).parseClaimsJws(token).getBody().get("sub");
     }
 
 

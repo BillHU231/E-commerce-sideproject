@@ -24,6 +24,7 @@ public class SecurityConfig  {
  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
   http.authorizeRequests() //定義那些請求路徑要被保護
           .antMatchers("/ping").permitAll()
+          .antMatchers("/login/ping").permitAll()
           .antMatchers(HttpMethod.POST,"/user/**").permitAll() //定義那些路徑不須驗譖
           .anyRequest().authenticated()   //其餘的都需要驗證
           .and()

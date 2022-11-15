@@ -49,7 +49,7 @@ public class UserLogicImpl implements UserLogic {
     public ResponseEntity<UserResponseDTO> register(UserRequestModel model) {
         UserResponseDTO response =new UserResponseDTO();
 
-        Integer accountNum = userMapper.findByMail(model.getUserMail(),model.getIdentity());
+        Integer accountNum = userMapper.findByMailAndType(model.getUserMail(),model.getIdentity());
         log.info("find user number {} ",accountNum);
 
         if(accountNum !=0){
