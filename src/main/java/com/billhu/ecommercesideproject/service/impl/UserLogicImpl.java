@@ -80,28 +80,34 @@ public class UserLogicImpl implements UserLogic {
         userEntity.setModifyTime(new Timestamp( System.currentTimeMillis()));
         log.info("userEntity {} ",userEntity.toString());
 
-        Long id= userMapper.create(userEntity);
+        userMapper.create(userEntity);
         log.info("user id {}",userEntity.getUserId());
+
+        long userId = 0L;
 
         if("reseller".equals(userEntity.getUserType())){
             log.info("create reseller user ");
             StoreUserEntity storeUserEntity =new StoreUserEntity();
             storeUserEntity.setUserId(userEntity.getUserId());
             storeUserEntity.setStoreName(model.getUserName());
-            Long storeUserId= storeUserMapper.create(storeUserEntity);
+            storeUserMapper.create(storeUserEntity);
 
-            log.info("store user id {} ",storeUserId);
+            userId=storeUserEntity.getStoreUserId();
+            log.info("store user id {} ",storeUserEntity.getUserId());
         }else {
             log.info("create customer user ");
             CustomerUserEntity customerUserEntity =new CustomerUserEntity();
             customerUserEntity.setUserId(userEntity.getUserId());
             customerUserEntity.setCustomerName(model.getUserName());
 
-            Long customerId= customerUserMapper.create(customerUserEntity);
-            log.info("customer user id {} ",customerId);
+             customerUserMapper.create(customerUserEntity);
+
+             userId= customerUserEntity.getCustomerUserId();
+            log.info("customer user id {} ",customerUserEntity.getUserId());
         }
 
         response.setIdentity(model.getIdentity());
+        response.setUserId(userId);
         response.setUserName(model.getUserName());
         response.setUserMail(model.getUserMail());
         response.setPassWord(model.getPassWord());

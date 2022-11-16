@@ -2,11 +2,14 @@ package com.billhu.ecommercesideproject.filters;
 
 import com.billhu.ecommercesideproject.service.impl.MyUserDetailsService;
 import com.billhu.ecommercesideproject.util.JwtTokenUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component
 public class JWTAuthenticationFilter extends OncePerRequestFilter { // spring security filter chen 要繼承OncePerRequestFilter
@@ -41,14 +45,32 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter { // spring se
         // 取的 JWT token
         String auth= request.getHeader(HttpHeaders.AUTHORIZATION);
 
+        String path =request.getRequestURI();
+
+
+
 
 
         if(auth != null && !auth.isBlank() && auth.startsWith("Bearer")){
             String token =auth.replace("Bearer ","");
             log.info("token {} ",token);
+            String mail =null;
 
+            try{
+             mail = tokenUtil.getMail(token);
 
-            String  mail = tokenUtil.getMail(token);
+            }catch (ExpiredJwtException e){ //token 時間到
+                log.error( e.getLocalizedMessage());
+                response.setStatus(401);
+
+                ObjectMapper objectMapper =new ObjectMapper();
+                String jsonRspBody=objectMapper.writeValueAsString("Access token is Expired");
+
+                PrintWriter printWriter=response.getWriter();
+                printWriter.append(jsonRspBody);
+                printWriter.close();
+
+            }
 
             if(mail.isBlank()){
                 response.sendError(HttpServletResponse.SC_ACCEPTED,"Access token has not mail");
@@ -87,10 +109,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter { // spring se
 
 
         for (String url: noInFilterArray){
-           if(url.equals(path)){
+           if(path.contains(url)){
                isShouldNotFilter =true;
            }
         }
+
+
 
         return isShouldNotFilter;
 

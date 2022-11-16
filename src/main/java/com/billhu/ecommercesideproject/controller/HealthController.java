@@ -2,6 +2,7 @@ package com.billhu.ecommercesideproject.controller;
 
 import com.billhu.ecommercesideproject.util.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@SecurityRequirement(name ="bearer-key" )
 public class HealthController {
     private static final Logger log = LoggerFactory.getLogger(HealthController.class);
     @Autowired

@@ -12,4 +12,5 @@ public class StoreUserEntity {
     private Long storeUserId;
     private  Long userId;
     private  String storeName;
+
 }

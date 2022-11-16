@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +20,21 @@ import javax.servlet.Filter;
 @EnableWebSecurity  //Spring Security config 註解
 public class SecurityConfig  {
 
+ private static final String[] AUTH_WHITELIST = {
+         // -- Swagger UI v2
+         "/v2/api-docs",
+         "/swagger-resources",
+         "/swagger-resources/**",
+         "/configuration/ui",
+         "/configuration/security",
+         "/swagger-ui.html",
+         "/webjars/**",
+         // -- Swagger UI v3 (OpenAPI)
+         "/v3/api-docs/**",
+         "/swagger-ui/**"
+         // other public endpoints of your API may be appended to this array
+ };
+
  @Autowired
  private  JWTAuthenticationFilter jwtFilter;
 
@@ -26,6 +44,7 @@ public class SecurityConfig  {
           .antMatchers("/ping").permitAll()
           .antMatchers("/login/ping").permitAll()
           .antMatchers(HttpMethod.POST,"/user/**").permitAll() //定義那些路徑不須驗譖
+          .antMatchers(AUTH_WHITELIST).permitAll()
           .anyRequest().authenticated()   //其餘的都需要驗證
           .and()
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //取消Session使用
@@ -37,6 +56,9 @@ public class SecurityConfig  {
 
   return http.build();
  }
+
+
+
 
 
 

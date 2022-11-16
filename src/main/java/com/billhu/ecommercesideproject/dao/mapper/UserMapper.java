@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * " +
+    @Select("SELECT COUNT(*) " +
             "FROM users " +
             "WHERE user_mail = #{mail} AND  user_type = #{type}")
     public Integer findByMailAndType(@Param("mail") String mail ,@Param("type") String type);
@@ -19,7 +19,7 @@ public interface UserMapper {
     @SelectKey( keyColumn = "user_id",keyProperty = "userId",resultType = long.class,before = false ,statement = "SELECT LAST_INSERT_ID()")
     @Insert("INSERT INTO users(user_mail,user_password,user_type,create_time,modify_time) " +
             " VALUES (#{userMail},#{userPassword},#{userType},#{createTime},#{modifyTime} ) ")
-    public Long create (UserEntity user);
+    public void create (UserEntity user);
     @Select("SELECT * FROM users " +
             "WHERE user_mail = #{mail} AND user_password = #{password}")
     @Results({
@@ -42,7 +42,7 @@ public interface UserMapper {
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "modifyTime",column = "modify_time")
     })
-    public List<UserEntity> findByMail(@Param("mail") String maul);
+    public List<UserEntity> findByMail(@Param("mail") String mail);
 
 
 }
