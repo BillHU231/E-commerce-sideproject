@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CustomerUserEntity {
-    private Long customerUserId;
-    private Long userId;
+    private Integer customerUserId;
+    private Integer userId;
     private String customerName;
 }

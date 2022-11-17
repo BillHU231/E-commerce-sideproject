@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @ToString
 public class UserEntity {
 
-    public Long userId;
+    public Integer userId;
     public String userMail;
     public String userPassword;
     public String userType;

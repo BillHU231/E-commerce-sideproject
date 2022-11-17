@@ -9,7 +9,7 @@ import java.util.List;
 public interface StoreUserMapper {
     @Insert("INSERT INTO store_user(user_id,store_name) " +
             " VALUES(#{userId},#{storeName})" )
-    @SelectKey(keyProperty = "storeUserId",keyColumn = "store_user_id",resultType = long.class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
+    @SelectKey(keyProperty = "storeUserId",keyColumn = "store_user_id",resultType = Integer.class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
     public void create (StoreUserEntity entity);
 
     @Select("SELECT * FROM store_user " +

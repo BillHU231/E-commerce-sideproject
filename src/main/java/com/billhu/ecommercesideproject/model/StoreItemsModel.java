@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class StoreItemsModel {
-    private Long storeId;
+    private Integer storeId;
     private  String storeName;
 }

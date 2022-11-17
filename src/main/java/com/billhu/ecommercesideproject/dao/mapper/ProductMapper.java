@@ -27,4 +27,11 @@ public interface ProductMapper {
             @Result(property = "isEnble",column = "is_enble")
     })
     public List<ProductEntity> findByStoreUserId(@Param(value = "storeId") Integer storeId);
+
+    @Select({"SELECT * FROM product " +
+            " WHERE store_user_id =#{storeId} " +
+            " AND product_id =#{productId}"})
+    public  ProductEntity findByStoreIdAndProductId(@Param(value = "storeId") Integer storeId,
+                                                    @Param(value = "productId") Integer productId);
+
 }
