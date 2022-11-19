@@ -34,9 +34,9 @@ public class ECPayService {
     @Value("${CreateOrderURL}")
     private String createOrderURL;
 
-    public void creatingOrder(Map<String,Object> body) throws NoSuchAlgorithmException {
-        Map<String,String> headers =new HashMap<>();
-        headers.put("Content-Type","application/x-www-form-urlencoded");
+    public Map<String,Object> creatingOrder(Map<String,Object> body)  {
+//        Map<String,String> headers =new HashMap<>();
+//        headers.put("Content-Type","application/x-www-form-urlencoded");
 
         body.put("MerchantID",merchantId);
         body.put("PaymentType",paymentType);
@@ -72,11 +72,13 @@ public class ECPayService {
 
         log.info("values4 {}",values4);
 
-        //
-
-//        String values5= Hashing.sha256().hashString(values4,StandardCharsets.UTF_8).toString();
-
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            log.error("create order CheckMacValue convent to SHA-256 error");
+            throw new RuntimeException(e);
+        }
         byte[] encodedhash = digest.digest(
                 values4.getBytes(StandardCharsets.UTF_8));
 
@@ -88,8 +90,10 @@ public class ECPayService {
 
         log.info("values6 {}",values6);
 
+        body.put("CheckMacValue",values6);
+        body.put("CreateOrderURL",createOrderURL);
 
-
+        return body;
 
     }
 

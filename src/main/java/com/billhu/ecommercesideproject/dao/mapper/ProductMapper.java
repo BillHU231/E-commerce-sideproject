@@ -31,6 +31,14 @@ public interface ProductMapper {
     @Select({"SELECT * FROM product " +
             " WHERE store_user_id =#{storeId} " +
             " AND product_id =#{productId}"})
+    @Results({
+            @Result(property = "productId",column = "product_id"),
+            @Result(property = "storeUserId",column = "store_user_id"),
+            @Result(property = "productName",column = "product_name"),
+            @Result(property = "productPrice",column = "product_price"),
+            @Result(property = "quantity",column = "quantity"),
+            @Result(property = "isEnble",column = "is_enble")
+    })
     public  ProductEntity findByStoreIdAndProductId(@Param(value = "storeId") Integer storeId,
                                                     @Param(value = "productId") Integer productId);
 

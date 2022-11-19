@@ -43,6 +43,7 @@ public class SecurityConfig  {
   http.authorizeRequests() //定義那些請求路徑要被保護
           .antMatchers("/ping").permitAll()
           .antMatchers("/login/ping").permitAll()
+          .antMatchers("/payment/**").permitAll() //進入付款頁面不驗證
           .antMatchers(HttpMethod.POST,"/user/**").permitAll() //定義那些路徑不須驗譖
           .antMatchers(AUTH_WHITELIST).permitAll()
           .anyRequest().authenticated()   //其餘的都需要驗證

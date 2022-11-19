@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class BuyProductRequestModel {
-    @NotBlank(message = "storeId can not be null")
+    @NotNull(message = "storeId can not be null")
     private Integer storeId;
     @NotNull(message = "shopping cart can not be null")
     private List<Integer> shoppingCartItems;
