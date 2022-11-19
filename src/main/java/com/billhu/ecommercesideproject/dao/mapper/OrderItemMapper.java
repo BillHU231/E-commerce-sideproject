@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.SelectKey;
 
 @Mapper
 public interface OrderItemMapper {
-    @Insert({"INSERT INTO order_items(order_id,store_user_id,product_id) " +
-            "VALUES (#{orderId},#{storeId},#{productId}) ;"})
-    @SelectKey(keyProperty = "orderItemId",keyColumn = "order_item_id",resultType = Integer.class,before = false,statement = "SELECT LAST_INSERT_ID()")
+    @Insert({"INSERT INTO order_items(order_item_id,order_id,store_user_id,product_id) " +
+            "VALUES (#{orderItemId},#{orderId},#{storeId},#{productId}) ;"})
     public Integer create (OrderItemEntity entity);
 }

@@ -34,15 +34,17 @@ public class ECPayService {
     @Value("${CreateOrderURL}")
     private String createOrderURL;
 
+    @Value("${OrderResultURL}")
+    private String orderResultURL;
+
     public Map<String,Object> creatingOrder(Map<String,Object> body)  {
-//        Map<String,String> headers =new HashMap<>();
-//        headers.put("Content-Type","application/x-www-form-urlencoded");
 
         body.put("MerchantID",merchantId);
         body.put("PaymentType",paymentType);
         body.put("ChoosePayment",choosePayment);
         body.put("ReturnURL",returnURL);
         body.put("EncryptType",encryptType);
+        body.put("OrderResultURL",orderResultURL);
 
         log.info("{} ",body.entrySet());
 

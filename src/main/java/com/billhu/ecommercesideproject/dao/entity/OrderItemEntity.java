@@ -10,8 +10,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class OrderItemEntity {
-    private long orderItemId;
-    private long orderId;
-    private long storeId;
-    private  long productId;
+    private String orderItemId;
+    private String orderId;
+    private Integer storeId;
+    private  Integer productId;
 }

@@ -13,7 +13,7 @@ import java.sql.Date;
 @ToString
 @NoArgsConstructor
 public class OrdersEntity {
-    private Integer orderId;
+    private String orderId;
     private Integer customerUserId;
     private BigDecimal purchasedTotal;
     private Date purchasedTime;

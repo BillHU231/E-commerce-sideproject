@@ -198,7 +198,9 @@ public class CustomerLogicImpl implements CustomerLogic {
 
         OrdersEntity orderEntity = new OrdersEntity();
 
+        String orderId=OrderNumUtil.generateOrderNum();
 
+        orderEntity.setOrderId(orderId);
         orderEntity.setCustomerUserId(customerId);
         orderEntity.setPurchasedTotal(total);
         orderEntity.setPurchasedTime(new Date(System.currentTimeMillis()));
@@ -212,18 +214,22 @@ public class CustomerLogicImpl implements CustomerLogic {
 
         }
         //建立ordersItem
-        Integer orderId = orderEntity.getOrderId();
+
 
         int i = 0;
 
         for (Integer productId : shoppingCart) {
+            i++;
             OrderItemEntity ordersItemEntity = new OrderItemEntity();
 
+            String ordersItemId =orderId+"-"+i;
+
+            ordersItemEntity.setOrderItemId(ordersItemId);
             ordersItemEntity.setOrderId(orderId);
             ordersItemEntity.setStoreId(storeId);
             ordersItemEntity.setProductId(productId);
 
-            i += ordersItemMapper.create(ordersItemEntity);
+             ordersItemMapper.create(ordersItemEntity);
 
         }
 
@@ -235,13 +241,13 @@ public class CustomerLogicImpl implements CustomerLogic {
 
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String orderDate = df.format(new java.util.Date());
-        String MerchantTradeNo = OrderNumUtil.generateOrderNum();
+
 
         Map<String, Object> requestBody = new TreeMap<>();
-        requestBody.put("MerchantTradeNo", MerchantTradeNo);
+        requestBody.put("MerchantTradeNo", orderId);
         requestBody.put("MerchantTradeDate", orderDate);
         requestBody.put("TotalAmount",  total.intValue());
-        requestBody.put("TradeDesc", customerEntity.get(0).getCustomerName() + " 銷售");
+        requestBody.put("TradeDesc", storeEntity.get(0).getStoreName() + " 銷售");
         requestBody.put("ItemName", buyItemsName.toString());
 
         requestBody = ecPayService.creatingOrder(requestBody);
@@ -272,6 +278,7 @@ public class CustomerLogicImpl implements CustomerLogic {
                 "\t\t<input type=\"hidden\" name=\"ChoosePayment\" value=\""+requestBody.get("ChoosePayment")+"\" />\n" +
                 "\t\t<input type=\"hidden\" name=\"CheckMacValue\" value=\""+requestBody.get("CheckMacValue")+"\" />\n" +
                 "\t\t<input type=\"hidden\" name=\"EncryptType\" value=\""+requestBody.get("EncryptType")+"\" />\n" +
+                "\t\t<input type=\"hidden\" name=\"OrderResultURL\" value=\""+requestBody.get("OrderResultURL")+"\" />\n" +
                 "\n" +
                 "\t</form>\n" +
                 "\n" +
@@ -296,7 +303,7 @@ public class CustomerLogicImpl implements CustomerLogic {
             Resource resource = resourceLoader.getResource("classpath:templates");
 
             log.info("templates path {}", resource.getFile().getPath());
-            String filePath = resource.getFile().getPath() + "/" + MerchantTradeNo + ".html";
+            String filePath = resource.getFile().getPath() + "/" + orderId + ".html";
             log.info("file path {}", filePath);
 
             Path file = Paths.get(filePath);
@@ -315,11 +322,11 @@ public class CustomerLogicImpl implements CustomerLogic {
         //回傳
         String paymentURL ;
 
-        if(request.isSecure()){
+        if(request.isSecure()){ //判斷是否可用https
 
-            paymentURL="https://"+ request.getHeader(HttpHeaders.HOST)+"/payment/"+MerchantTradeNo;
+            paymentURL="https://"+ request.getHeader(HttpHeaders.HOST)+"/payment/"+orderId;
         }else{
-            paymentURL="http://"+ request.getHeader(HttpHeaders.HOST)+"/payment/"+MerchantTradeNo;
+            paymentURL="http://"+ request.getHeader(HttpHeaders.HOST)+"/payment/"+orderId;
         }
 
 
