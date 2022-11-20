@@ -103,6 +103,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter { // spring se
         Boolean isShouldNotFilter =false;
         String path= request.getRequestURI();
 
+        log.info("request url {} ",path);
+
 
 
         String[] noInFilterArray =noInFilterUrl.split(",");

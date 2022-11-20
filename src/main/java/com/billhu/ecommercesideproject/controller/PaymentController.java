@@ -26,7 +26,7 @@ public class PaymentController {
         return merchantTradeNo;
     }
 
-    @PostMapping("/payment/test")
+    @PostMapping("/payment/result")
     public String paymentSuccess(HttpServletRequest request,  Model model){
 
         StringBuilder bodyString =new StringBuilder();
