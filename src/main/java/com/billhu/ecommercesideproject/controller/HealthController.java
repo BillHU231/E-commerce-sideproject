@@ -1,21 +1,20 @@
 package com.billhu.ecommercesideproject.controller;
 
 import com.billhu.ecommercesideproject.util.JwtTokenUtil;
-import io.jsonwebtoken.ExpiredJwtException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-
+@Tag(name = "Health",description = "services for health")
 @RestController
 @SecurityRequirement(name ="bearer-key" )
 public class HealthController {
@@ -23,11 +22,22 @@ public class HealthController {
     @Autowired
     JwtTokenUtil tokenUtil;
 
+
+    @Operation(summary = "services for Health")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "The service is available")
+
+    })
     @GetMapping("/ping")
     public String applicationHealth(){
         log.error("Hello");
         return "pong";
     }
+    @Operation(summary = "token for Health")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "The token is available")
+
+    })
     @GetMapping("/login/ping")
     public ResponseEntity<String> authorizationValidate(@RequestHeader(value = "Authorization",required = true) String auth){
 

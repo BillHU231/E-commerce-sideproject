@@ -5,7 +5,11 @@ import com.billhu.ecommercesideproject.model.LoginResponseDTO;
 import com.billhu.ecommercesideproject.model.UserRequestModel;
 import com.billhu.ecommercesideproject.model.UserResponseDTO;
 import com.billhu.ecommercesideproject.service.UserLogic;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import javax.validation.Valid;
 
 
 
+@Tag(name = "user-controller",description = "user 控制項")
 @RestController
 @RequestMapping("/user")
 @SecurityRequirement(name ="bearer-key" )
@@ -29,6 +34,13 @@ public class UserController {
     UserLogic userLogic;
 
 
+    @Operation(summary = "user 註冊")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "create user success"),
+            @ApiResponse(responseCode = "403", description = "You are not Authorised"),
+            @ApiResponse(responseCode = "401", description = "Access token is Expired"),
+            @ApiResponse(responseCode = "400",description = "invalid parameters received")
+    })
     @PostMapping(value = "/sing-out" ,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponseDTO> createUser(
            @RequestBody @Valid UserRequestModel requestBody,
@@ -83,6 +95,13 @@ public class UserController {
         return userLogic.register(requestBody);
 
    }
+    @Operation(summary = "user 登入")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "login  success"),
+            @ApiResponse(responseCode = "403", description = "You are not Authorised"),
+            @ApiResponse(responseCode = "401", description = "Access token is Expired"),
+            @ApiResponse(responseCode = "400",description = "invalid parameters received")
+    })
    @PostMapping("/login")
    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestModel model ,BindingResult bindingResult){
 

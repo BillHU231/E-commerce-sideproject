@@ -5,7 +5,11 @@ import com.billhu.ecommercesideproject.model.CreateProductResponseDTO;
 import com.billhu.ecommercesideproject.model.DeleteProductRequestModel;
 import com.billhu.ecommercesideproject.model.DeleteProductResponseDTO;
 import com.billhu.ecommercesideproject.service.StoreLogic;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
+@Tag(name = "store-Controller",description = "經銷商控制項")
 @RestController
 @RequestMapping("/store")
 @SecurityRequirement(name ="bearer-key" )
@@ -25,6 +29,14 @@ public class StoreController {
     @Autowired
     StoreLogic storeLogic;
 
+    @Operation(summary = "經銷商新增產品")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Create product success"),
+            @ApiResponse(responseCode = "403", description = "You are not Authorised"),
+            @ApiResponse(responseCode = "401", description = "Access token is Expired"),
+            @ApiResponse(responseCode = "400",description = "invalid parameters received")
+
+    })
     @PostMapping("/{store-id}/create/product")
     public ResponseEntity<CreateProductResponseDTO> createProduct(@PathVariable(name = "store-id") Integer storeId,
                                                                   @RequestBody @Valid CreateProductRequestModel model,
@@ -44,6 +56,14 @@ public class StoreController {
         return storeLogic.createProduct(storeId, model);
 
     }
+    @Operation(summary = "經銷商刪除產品")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Delete product success"),
+            @ApiResponse(responseCode = "403", description = "You are not Authorised"),
+            @ApiResponse(responseCode = "401", description = "Access token is Expired"),
+            @ApiResponse(responseCode = "400",description = "invalid parameters received")
+
+    })
     @DeleteMapping("/{store-id}/delete/product")
     private ResponseEntity<DeleteProductResponseDTO> deleteProduct(@PathVariable(name = "store-id") Integer storeId,
                                                                    @RequestBody@ Valid DeleteProductRequestModel model,
