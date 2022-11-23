@@ -11,7 +11,7 @@
     <groupId>com.billhu</groupId>
     <artifactId>e-commerce-sideproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>e-commerce-sideproject</name>
     <description>my e-commerce side project</description>
     <!--application.properties 的spring.profiles.active 對應下面的值就啟用 哪個properties-->
@@ -44,6 +44,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--unit test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <!-- thymeleaf -->
         <dependency>
@@ -117,6 +123,7 @@
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
+
 
     </dependencies>
 
