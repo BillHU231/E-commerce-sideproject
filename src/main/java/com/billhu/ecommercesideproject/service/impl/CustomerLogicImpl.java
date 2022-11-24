@@ -9,6 +9,7 @@ import com.billhu.ecommercesideproject.util.OrderNumUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -20,18 +21,19 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class CustomerLogicImpl implements CustomerLogic {
@@ -51,6 +53,8 @@ public class CustomerLogicImpl implements CustomerLogic {
     ECPayService ecPayService;
     @Autowired
     ResourceLoader resourceLoader;
+    @Value("${file.path}")
+    private static  String filePath;
 
     @Override
     public ResponseEntity<QueryStoreResponseDTO> queryStore() {
@@ -297,25 +301,40 @@ public class CustomerLogicImpl implements CustomerLogic {
                 "</body>\n" +
                 "</html>";
 
+        //templates dir
+//        String templatesPath=this.getClass().getResource("/").getPath()+"templates";
+//        Path templates =Paths.get(templatesPath);
+//        log.info("templates path {} ",templatesPath);
+//
+//        try {
+//            Files.createDirectories(templates);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        //create html file and write
+        String htmlPath = filePath +"templates/" + orderId + ".html";
+        log.info("file path {}", htmlPath);
+        Path htmlFile=Paths.get(htmlPath);
 
         try {
-
-            Resource resource = resourceLoader.getResource("classpath:templates");
-
-            log.info("templates path {}", resource.getFile().getPath());
-            String filePath = resource.getFile().getPath() + "/" + orderId + ".html";
-            log.info("file path {}", filePath);
-
-            Path file = Paths.get(filePath);
-            Files.deleteIfExists(file);
-            Files.createFile(file);
-
-            Files.writeString(file, fileContent);
-
-
+            Files.createFile(htmlFile);
+            Files.write(htmlFile, fileContent.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+        // write html file
+
+//        try(FileOutputStream fos =new FileOutputStream(filePath);) {
+//
+//            byte[] contentBye=fileContent.getBytes();
+//            fos.write(contentBye);
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
 

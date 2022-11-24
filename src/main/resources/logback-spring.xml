@@ -21,11 +21,14 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 
             <!-- 依照 pom.xml 的 <activatedProperties> 變數決定這裡的 name -->
-            <springProfile name="dev">
+            <springProfile name="windows">
                 <fileNamePattern>D:\logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
             </springProfile>
-            <springProfile name="prod">
-                <fileNamePattern>./target/log-prod/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <springProfile name="mac">
+                <fileNamePattern>./target/logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            </springProfile>
+            <springProfile name="docker">
+                <fileNamePattern>./logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
             </springProfile>
         </rollingPolicy>
 

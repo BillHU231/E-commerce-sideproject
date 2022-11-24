@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class OrderNumUtil {
 
-    private static Integer orderId=1000;
+    private static Integer orderId=1011;
 
     public static  String  generateOrderNum(){
         StringBuilder orderNum =new StringBuilder("EC");

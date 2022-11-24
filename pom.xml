@@ -16,18 +16,25 @@
     <description>my e-commerce side project</description>
     <!--application.properties 的spring.profiles.active 對應下面的值就啟用 哪個properties-->
     <profiles>
-        <!--dev-->
+        <!--windows-->
         <profile>
-            <id>dev</id>
+            <id>windows</id>
             <properties>
-                <activatedProperties>dev</activatedProperties>
+                <activatedProperties>windows</activatedProperties>
             </properties>
         </profile>
-        <!--prod-->
+        <!--mac-->
         <profile>
-            <id>prod</id>
+            <id>mac</id>
             <properties>
-                <activatedProperties>prod</activatedProperties>
+                <activatedProperties>mac</activatedProperties>
+            </properties>
+        </profile>
+        <!--docker-->
+        <profile>
+            <id>docker</id>
+            <properties>
+                <activatedProperties>docker</activatedProperties>
             </properties>
         </profile>
     </profiles>

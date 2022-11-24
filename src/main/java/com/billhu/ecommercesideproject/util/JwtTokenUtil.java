@@ -7,12 +7,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.security.KeyFactory;
@@ -30,10 +30,11 @@ public class JwtTokenUtil implements Serializable { //表示序列化
 
     private final static Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
     public static final long JWT_TOKEN_VALIDITY=1*60*60*1000; //設定JWT TOKEN有效時間
-    public static final String PRIVATEKEYFILEPATH="classpath:sshKey/id_rsa.key";
 
-//    @Value("${jwt.secret}")
-    private static String secret ="billHUSideProject";
+
+    @Value("${key.path}")
+    public static  String PRIVATEKEYFILEPATH;
+
 
     public  String generateToken(LoginRequestModel model){
         Map<String,Object> header = new HashMap<>();
@@ -62,13 +63,30 @@ public class JwtTokenUtil implements Serializable { //表示序列化
 
     private  RSAPrivateKey getPrivateKey() {
         RSAPrivateKey rsaPrivate = null ;
-        try {
-            File file = ResourceUtils.getFile(PRIVATEKEYFILEPATH);
-            String key = new String(Files.readAllBytes(file.toPath()) , Charset.defaultCharset());
-            key =key.substring(key.indexOf('\n'));
-            key= key.substring(0, key.indexOf('-'));
-            String privateKey = key.replaceAll("\n", "");
 
+
+        log.info("PRIVATEKEYFILEPATH {}",PRIVATEKEYFILEPATH);
+        try( InputStream is=JwtTokenUtil.class.getResource(PRIVATEKEYFILEPATH).openStream();
+            BufferedReader reader=new BufferedReader(new InputStreamReader(is));) {
+            StringBuilder key = new StringBuilder();
+            String st="";
+
+            if(is!=null){
+                int i=0;
+                while (  (st= reader.readLine()) !=null){
+                    i++;
+                    if (i==1){
+                        continue;
+                    }
+                    key.append(st);
+
+                }
+            }
+
+
+
+            String privateKey= key.toString().substring(0, key.toString().indexOf('-'));
+            log.info("privateKey {}",privateKey);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKey));
             rsaPrivate= (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
