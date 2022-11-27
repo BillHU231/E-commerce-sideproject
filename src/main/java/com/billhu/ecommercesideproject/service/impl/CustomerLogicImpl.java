@@ -53,8 +53,8 @@ public class CustomerLogicImpl implements CustomerLogic {
     ECPayService ecPayService;
     @Autowired
     ResourceLoader resourceLoader;
-    @Value("${file.path}")
-    private static  String filePath;
+    @Value("${templates.path}")
+    private   String templatesPath;
 
     @Override
     public ResponseEntity<QueryStoreResponseDTO> queryStore() {
@@ -240,102 +240,6 @@ public class CustomerLogicImpl implements CustomerLogic {
         if (i != shoppingCart.size()) {
             throw new CheckoutException("Create ordersItem table fail");
         }
-
-        //串接綠界
-
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        String orderDate = df.format(new java.util.Date());
-
-
-        Map<String, Object> requestBody = new TreeMap<>();
-        requestBody.put("MerchantTradeNo", orderId);
-        requestBody.put("MerchantTradeDate", orderDate);
-        requestBody.put("TotalAmount",  total.intValue());
-        requestBody.put("TradeDesc", storeEntity.get(0).getStoreName() + " 銷售");
-        requestBody.put("ItemName", buyItemsName.toString());
-
-        requestBody = ecPayService.creatingOrder(requestBody);
-
-        log.info("create order request body {}", requestBody.toString());
-
-        //寫HTML黨
-        String fileContent = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "\t<meta charset=\"UTF-8\">\n" +
-                "\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
-                "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
-                "\t<title></title>\n" +
-                "\n" +
-                "</head>\n" +
-                "<body onload=\"send()\">\n" +
-                "\t<h1>付款頁面轉導中.....</h1>\n" +
-                "\t<form  action=\""+requestBody.get("CreateOrderURL")+"\" method=\"post\" id=\"myForm\">\n" +
-                "\t\t<input type=\"hidden\" name=\"MerchantID\" value=\""+requestBody.get("MerchantID")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"MerchantTradeNo\" value=\""+requestBody.get("MerchantTradeNo")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"MerchantTradeDate\" value=\""+requestBody.get("MerchantTradeDate")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"PaymentType\" value=\""+requestBody.get("PaymentType")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"TotalAmount\" value=\""+requestBody.get("TotalAmount")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"TradeDesc\" value=\""+requestBody.get("TradeDesc")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"ItemName\" value=\""+requestBody.get("ItemName")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"ReturnURL\" value=\""+requestBody.get("ReturnURL")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"ChoosePayment\" value=\""+requestBody.get("ChoosePayment")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"CheckMacValue\" value=\""+requestBody.get("CheckMacValue")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"EncryptType\" value=\""+requestBody.get("EncryptType")+"\" />\n" +
-                "\t\t<input type=\"hidden\" name=\"OrderResultURL\" value=\""+requestBody.get("OrderResultURL")+"\" />\n" +
-                "\n" +
-                "\t</form>\n" +
-                "\n" +
-                "\t<script>\n" +
-                "\t\n" +
-                "\n" +
-                "\t\tfunction send(){\n" +
-                "\n" +
-                "\t\t\tsetTimeout(function(){\n" +
-                "\t\t\t\tdocument.getElementById(\"myForm\").submit();\n" +
-                "\t\t\t},5000)\n" +
-                "\t\t\t\n" +
-                "\t\t}\n" +
-                "\n" +
-                "\t</script>\n" +
-                "</body>\n" +
-                "</html>";
-
-        //templates dir
-//        String templatesPath=this.getClass().getResource("/").getPath()+"templates";
-//        Path templates =Paths.get(templatesPath);
-//        log.info("templates path {} ",templatesPath);
-//
-//        try {
-//            Files.createDirectories(templates);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-        //create html file and write
-        String htmlPath = filePath +"templates/" + orderId + ".html";
-        log.info("file path {}", htmlPath);
-        Path htmlFile=Paths.get(htmlPath);
-
-        try {
-            Files.createFile(htmlFile);
-            Files.write(htmlFile, fileContent.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        // write html file
-
-//        try(FileOutputStream fos =new FileOutputStream(filePath);) {
-//
-//            byte[] contentBye=fileContent.getBytes();
-//            fos.write(contentBye);
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
 
 
         //回傳

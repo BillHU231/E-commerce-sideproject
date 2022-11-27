@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body onload="send()">
+<h1>付款頁面轉導中.....</h1>
+<form action="#" th:action="${url}" method="post" id="myForm">
+    <input type="hidden" name="MerchantID" th:value="${MerchantID}" />
+    <input type="hidden" name="MerchantTradeNo" th:value="${MerchantTradeNo}" />
+    <input type="hidden" name="MerchantTradeDate" th:value="${MerchantTradeDate}" />
+    <input type="hidden" name="PaymentType" th:value="${PaymentType}" />
+    <input type="hidden" name="TotalAmount" th:value="${TotalAmount}" />
+    <input type="hidden" name="TradeDesc" th:value="${TradeDesc}" />
+    <input type="hidden" name="ItemName" th:value="${ItemName}" />
+    <input type="hidden" name="ReturnURL" th:value="${ReturnURL}" />
+    <input type="hidden" name="ChoosePayment" th:value="${ChoosePayment}" />
+    <input type="hidden" name="CheckMacValue" th:value="${CheckMacValue}" />
+    <input type="hidden" name="EncryptType" th:value="${EncryptType}" />
+    <input type="hidden" name="OrderResultURL" th:value="${OrderResultURL}" />
+</form>
+
+<script>
+    function send(){
+        setTimeout(function (){
+            document.getElementById("myForm").submit();
+        }),5000
+    }
+</script>
+
+</body>
+</html>

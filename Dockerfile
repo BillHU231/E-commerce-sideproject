@@ -7,11 +7,9 @@ WORKDIR /app
 #當前目錄在/app，把jar檔複製到/app/app.jar，故'.' 表示/app
 COPY ${JAR_FILE} ./app.jar
 # copy ssh key to /app/file/sshkey/
-COPY target/classes/sshKey/* ./file/sshkey/
-# copy html file 到 /app/file/templates/下
-COPY target/classes/templates/*.html  ./file/templates/
+COPY target/classes/sshKey/* ./file/sshKey/
 #此Container 開放8081 port
-EXPOSE 8080
+EXPOSE 8081
 #執行 java -jar /app/app.jar
 CMD ["java","-jar","./app.jar"]
 

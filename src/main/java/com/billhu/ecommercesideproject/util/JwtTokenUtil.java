@@ -33,7 +33,7 @@ public class JwtTokenUtil implements Serializable { //表示序列化
 
 
     @Value("${key.path}")
-    public static  String PRIVATEKEYFILEPATH;
+    public   String PRIVATEKEYFILEPATH;
 
 
     public  String generateToken(LoginRequestModel model){
@@ -66,7 +66,7 @@ public class JwtTokenUtil implements Serializable { //表示序列化
 
 
         log.info("PRIVATEKEYFILEPATH {}",PRIVATEKEYFILEPATH);
-        try( InputStream is=JwtTokenUtil.class.getResource(PRIVATEKEYFILEPATH).openStream();
+        try( InputStream is=new FileInputStream(PRIVATEKEYFILEPATH);
             BufferedReader reader=new BufferedReader(new InputStreamReader(is));) {
             StringBuilder key = new StringBuilder();
             String st="";

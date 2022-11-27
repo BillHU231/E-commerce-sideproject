@@ -22,8 +22,9 @@ public class PaymentController {
 
 
     @GetMapping(value = "/payment/{MerchantTradeNo}")
-    public String checkOut(@PathVariable(value = "MerchantTradeNo") String merchantTradeNo){
-        return merchantTradeNo;
+    public String checkOut(@PathVariable(value = "MerchantTradeNo") String merchantTradeNo,Model model){
+        paymentLogic.payment(merchantTradeNo,model);
+        return "payment";
     }
 
     @PostMapping("/payment/result")
