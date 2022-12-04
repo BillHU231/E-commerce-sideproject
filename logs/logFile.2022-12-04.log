@@ -1,0 +1,79 @@
+2022-12-04 17:36:46,769 INFO  [background-preinit] Version: HV000001: Hibernate Validator 6.2.5.Final
+2022-12-04 17:36:46,769 INFO  [main] ECommerceSideprojectApplication: Starting ECommerceSideprojectApplication using Java 11.0.12 on BillHUdeMacBook-Air.local with PID 41740 (/Users/bill/Intellj-workspace/E-commerce-sideproject/target/classes started by bill in /Users/bill/Intellj-workspace/E-commerce-sideproject)
+2022-12-04 17:36:46,770 INFO  [main] ECommerceSideprojectApplication: The following 1 profile is active: "docker"
+2022-12-04 17:36:47,325 INFO  [main] TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2022-12-04 17:36:47,332 INFO  [main] Http11NioProtocol: Initializing ProtocolHandler ["http-nio-8080"]
+2022-12-04 17:36:47,332 INFO  [main] StandardService: Starting service [Tomcat]
+2022-12-04 17:36:47,332 INFO  [main] StandardEngine: Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-04 17:36:47,385 INFO  [main] [/]: Initializing Spring embedded WebApplicationContext
+2022-12-04 17:36:47,385 INFO  [main] ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 597 ms
+2022-12-04 17:36:47,417 INFO  [main] HikariDataSource: HikariPool-1 - Starting...
+2022-12-04 17:36:50,107 INFO  [main] HikariDataSource: HikariPool-1 - Start completed.
+2022-12-04 17:36:50,265 INFO  [main] DefaultSecurityFilterChain: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5b332439, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@59262a90, org.springframework.security.web.context.SecurityContextPersistenceFilter@f017dd0, org.springframework.security.web.header.HeaderWriterFilter@59d5a6fd, org.springframework.security.web.authentication.logout.LogoutFilter@4217bce6, com.billhu.ecommercesideproject.filters.JWTAuthenticationFilter@6c835217, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f51f588, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6fb22ae3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78479f2b, org.springframework.security.web.session.SessionManagementFilter@3bc20984, org.springframework.security.web.access.ExceptionTranslationFilter@13ca16bf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@147efd9]
+2022-12-04 17:36:50,630 INFO  [main] Http11NioProtocol: Starting ProtocolHandler ["http-nio-8080"]
+2022-12-04 17:36:50,637 WARN  [main] AnnotationConfigServletWebServerApplicationContext: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-12-04 17:36:50,638 INFO  [main] HikariDataSource: HikariPool-1 - Shutdown initiated...
+2022-12-04 17:36:50,641 INFO  [main] HikariDataSource: HikariPool-1 - Shutdown completed.
+2022-12-04 17:36:50,642 INFO  [main] Http11NioProtocol: Pausing ProtocolHandler ["http-nio-8080"]
+2022-12-04 17:36:50,642 INFO  [main] StandardService: Stopping service [Tomcat]
+2022-12-04 17:36:50,644 INFO  [main] Http11NioProtocol: Stopping ProtocolHandler ["http-nio-8080"]
+2022-12-04 17:36:50,644 INFO  [main] Http11NioProtocol: Destroying ProtocolHandler ["http-nio-8080"]
+2022-12-04 17:36:50,649 INFO  [main] ConditionEvaluationReportLoggingListener: 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2022-12-04 17:36:50,656 ERROR [main] LoggingFailureAnalysisReporter: 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-12-04 17:37:07,677 INFO  [main] ECommerceSideprojectApplication: Starting ECommerceSideprojectApplication using Java 11.0.12 on BillHUdeMacBook-Air.local with PID 41772 (/Users/bill/Intellj-workspace/E-commerce-sideproject/target/classes started by bill in /Users/bill/Intellj-workspace/E-commerce-sideproject)
+2022-12-04 17:37:07,678 INFO  [main] ECommerceSideprojectApplication: The following 1 profile is active: "docker"
+2022-12-04 17:37:07,681 INFO  [background-preinit] Version: HV000001: Hibernate Validator 6.2.5.Final
+2022-12-04 17:37:08,181 INFO  [main] TomcatWebServer: Tomcat initialized with port(s): 9400 (http)
+2022-12-04 17:37:08,184 INFO  [main] Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9400"]
+2022-12-04 17:37:08,184 INFO  [main] StandardService: Starting service [Tomcat]
+2022-12-04 17:37:08,184 INFO  [main] StandardEngine: Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-04 17:37:08,219 INFO  [main] [/]: Initializing Spring embedded WebApplicationContext
+2022-12-04 17:37:08,219 INFO  [main] ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 520 ms
+2022-12-04 17:37:08,239 INFO  [main] HikariDataSource: HikariPool-1 - Starting...
+2022-12-04 17:37:11,107 INFO  [main] HikariDataSource: HikariPool-1 - Start completed.
+2022-12-04 17:37:11,259 INFO  [main] DefaultSecurityFilterChain: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b377a53, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b0e031b, org.springframework.security.web.context.SecurityContextPersistenceFilter@372954e1, org.springframework.security.web.header.HeaderWriterFilter@2fbd390, org.springframework.security.web.authentication.logout.LogoutFilter@bb8ead8, com.billhu.ecommercesideproject.filters.JWTAuthenticationFilter@544e3679, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@173511ff, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6df11e91, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6009cd34, org.springframework.security.web.session.SessionManagementFilter@19ae36f4, org.springframework.security.web.access.ExceptionTranslationFilter@26874f2c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5b332439]
+2022-12-04 17:37:11,584 INFO  [main] Http11NioProtocol: Starting ProtocolHandler ["http-nio-9400"]
+2022-12-04 17:37:11,596 INFO  [main] TomcatWebServer: Tomcat started on port(s): 9400 (http) with context path ''
+2022-12-04 17:37:11,603 INFO  [main] ECommerceSideprojectApplication: Started ECommerceSideprojectApplication in 4.118 seconds (JVM running for 4.411)
+2022-12-04 17:37:29,614 INFO  [http-nio-9400-exec-1] [/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-04 17:37:29,616 INFO  [http-nio-9400-exec-1] DispatcherServlet: Initializing Servlet 'dispatcherServlet'
+2022-12-04 17:37:29,618 INFO  [http-nio-9400-exec-1] DispatcherServlet: Completed initialization in 2 ms
+2022-12-04 17:37:29,627 INFO  [http-nio-9400-exec-1] JWTAuthenticationFilter: in the shouldNotFilter
+2022-12-04 17:37:29,627 INFO  [http-nio-9400-exec-1] JWTAuthenticationFilter: request url / 
+2022-12-04 17:37:29,627 INFO  [http-nio-9400-exec-1] JWTAuthenticationFilter:  in side  the spring security filter 
+2022-12-04 17:37:29,758 INFO  [http-nio-9400-exec-2] JWTAuthenticationFilter: in the shouldNotFilter
+2022-12-04 17:37:29,758 INFO  [http-nio-9400-exec-2] JWTAuthenticationFilter: request url /favicon.ico 
+2022-12-04 17:37:29,758 INFO  [http-nio-9400-exec-2] JWTAuthenticationFilter:  in side  the spring security filter 
+2022-12-04 17:37:51,384 INFO  [SpringApplicationShutdownHook] HikariDataSource: HikariPool-1 - Shutdown initiated...
+2022-12-04 17:37:51,388 INFO  [SpringApplicationShutdownHook] HikariDataSource: HikariPool-1 - Shutdown completed.
+2022-12-04 17:37:52,969 INFO  [main] ECommerceSideprojectApplication: Starting ECommerceSideprojectApplication using Java 11.0.12 on BillHUdeMacBook-Air.local with PID 41827 (/Users/bill/Intellj-workspace/E-commerce-sideproject/target/classes started by bill in /Users/bill/Intellj-workspace/E-commerce-sideproject)
+2022-12-04 17:37:52,971 INFO  [main] ECommerceSideprojectApplication: The following 1 profile is active: "docker"
+2022-12-04 17:37:52,980 INFO  [background-preinit] Version: HV000001: Hibernate Validator 6.2.5.Final
+2022-12-04 17:37:53,532 INFO  [main] TomcatWebServer: Tomcat initialized with port(s): 9400 (http)
+2022-12-04 17:37:53,537 INFO  [main] Http11NioProtocol: Initializing ProtocolHandler ["http-nio-9400"]
+2022-12-04 17:37:53,537 INFO  [main] StandardService: Starting service [Tomcat]
+2022-12-04 17:37:53,537 INFO  [main] StandardEngine: Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-04 17:37:53,571 INFO  [main] [/]: Initializing Spring embedded WebApplicationContext
+2022-12-04 17:37:53,571 INFO  [main] ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 566 ms
+2022-12-04 17:37:53,592 INFO  [main] HikariDataSource: HikariPool-1 - Starting...
+2022-12-04 17:37:56,413 INFO  [main] HikariDataSource: HikariPool-1 - Start completed.
+2022-12-04 17:37:56,563 INFO  [main] DefaultSecurityFilterChain: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7b377a53, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b0e031b, org.springframework.security.web.context.SecurityContextPersistenceFilter@372954e1, org.springframework.security.web.header.HeaderWriterFilter@2fbd390, org.springframework.security.web.authentication.logout.LogoutFilter@bb8ead8, com.billhu.ecommercesideproject.filters.JWTAuthenticationFilter@544e3679, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@173511ff, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6df11e91, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6009cd34, org.springframework.security.web.session.SessionManagementFilter@19ae36f4, org.springframework.security.web.access.ExceptionTranslationFilter@26874f2c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5b332439]
+2022-12-04 17:37:56,899 INFO  [main] TomcatWebServer: Tomcat started on port(s): 9400 (http) with context path ''
+2022-12-04 17:37:56,906 INFO  [main] ECommerceSideprojectApplication: Started ECommerceSideprojectApplication in 4.14 seconds (JVM running for 4.45)
+2022-12-04 17:37:56,917 INFO  [SpringApplicationShutdownHook] HikariDataSource: HikariPool-1 - Shutdown initiated...
+2022-12-04 17:37:56,919 INFO  [SpringApplicationShutdownHook] HikariDataSource: HikariPool-1 - Shutdown completed.
