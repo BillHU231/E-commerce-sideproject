@@ -33,6 +33,11 @@ public class HealthController {
         log.error("Hello");
         return "pong";
     }
+    @GetMapping("/")
+    public String hreoKuHealth(){
+        return "pong";
+    }
+
     @Operation(summary = "token for Health")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "The token is available")
