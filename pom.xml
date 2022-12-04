@@ -39,9 +39,14 @@
         </profile>
     </profiles>
 
+
     <properties>
+        <!--    azure jlib    -->
+        <!--        <docker.image.prefix>billresource.azurecr.io</docker.image.prefix>-->
+        <!--        <jib-maven-plugin.version>2.2.0</jib-maven-plugin.version>-->
         <java.version>11</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -130,8 +135,6 @@
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
-
-
     </dependencies>
 
     <build>

@@ -9,7 +9,6 @@ COPY ${JAR_FILE} ./app.jar
 # copy ssh key to /app/file/sshkey/
 COPY target/classes/sshKey/* ./file/sshKey/
 #此Container 開放8081 port
-EXPOSE 8081
+EXPOSE 80
 #執行 java -jar /app/app.jar
 CMD ["java","-jar","./app.jar"]
-
