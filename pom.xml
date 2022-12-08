@@ -38,6 +38,13 @@
                 <activatedProperties>docker</activatedProperties>
             </properties>
         </profile>
+        <!--heroku-->
+        <profile>
+            <id>heroku</id>
+            <properties>
+                <activatedProperties>heroku</activatedProperties>
+            </properties>
+        </profile>
     </profiles>
 
 

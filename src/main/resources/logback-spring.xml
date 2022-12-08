@@ -30,6 +30,9 @@
             <springProfile name="docker">
                 <fileNamePattern>./logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
             </springProfile>
+            <springProfile name="heroku">
+                <fileNamePattern>./logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            </springProfile>
         </rollingPolicy>
 
         <!-- 設定寫入 Log File 的格式設定 -->
