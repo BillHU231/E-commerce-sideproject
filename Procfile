@@ -1,1 +1,1 @@
-web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/web-runner-1.0jar
+web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/web-runner-1.0.jar
