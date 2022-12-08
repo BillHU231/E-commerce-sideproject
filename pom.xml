@@ -11,7 +11,7 @@
     <groupId>com.billhu</groupId>
     <artifactId>web-runner</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>e-commerce-sideproject</name>
     <description>my e-commerce side project</description>
 
