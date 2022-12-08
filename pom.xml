@@ -42,13 +42,16 @@
 
 
     <properties>
-        <!--    azure jlib    -->
-        <!--        <docker.image.prefix>billresource.azurecr.io</docker.image.prefix>-->
-        <!--        <jib-maven-plugin.version>2.2.0</jib-maven-plugin.version>-->
         <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -140,9 +143,9 @@
 
     </dependencies>
 
-
-    <build>
-        <plugins>
+<!-- local maven config -->
+<!--    <build>-->
+<!--        <plugins>-->
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
 <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
@@ -155,31 +158,32 @@
 <!--                    </excludes>-->
 <!--                </configuration>-->
 <!--            </plugin>-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.heroku</groupId>
-                                    <artifactId>web-runner</artifactId>
-                                    <version>9.0.30.0</version>
-                                    <destFileName>webapp-runner${version}.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
+<!--        </plugins>-->
+<!--    </build>-->
+<!--  heroku maven config  -->
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>build-info</goal>
+                            </goals>
+                            <configuration>
+                                <additionalProperties>
+                                    <encoding.source>${project.build.sourceEncoding}</encoding.source>
+                                    <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
+                                    <java.source>${maven.compiler.source}</java.source>
+                                    <java.target>${maven.compiler.target}</java.target>
+                                </additionalProperties>
+                            </configuration>
+                        </execution>
+                    </executions>
 
-            </plugin>
-        </plugins>
-    </build>
+                </plugin>
+            </plugins>
+        </build>
 
 </project>
