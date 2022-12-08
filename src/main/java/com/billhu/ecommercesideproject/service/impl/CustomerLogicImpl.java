@@ -53,8 +53,7 @@ public class CustomerLogicImpl implements CustomerLogic {
     ECPayService ecPayService;
     @Autowired
     ResourceLoader resourceLoader;
-    @Value("${templates.path}")
-    private   String templatesPath;
+
 
     @Override
     public ResponseEntity<QueryStoreResponseDTO> queryStore() {
