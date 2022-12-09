@@ -5,5 +5,5 @@ import org.springframework.ui.Model;
 public interface PaymentLogic {
     public Integer paymentSucceed(String orderId);
 
-    public void payment(String orderId, Model model);
+    public void payment(String orderId,String serverPath,  Model model);
 }

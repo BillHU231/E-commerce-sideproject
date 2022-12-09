@@ -25,8 +25,7 @@ public class ECPayService {
     private String merchantId;
     @Value("${PaymentType}")
     private String paymentType;
-    @Value("${ReturnURL}")
-    private String returnURL;
+
     @Value("${ChoosePayment}")
     private String choosePayment;
     @Value("${EncryptType}")
@@ -34,17 +33,15 @@ public class ECPayService {
     @Value("${CreateOrderURL}")
     private String createOrderURL;
 
-    @Value("${OrderResultURL}")
-    private String orderResultURL;
+
 
     public Map<String,Object> creatingOrder(Map<String,Object> body)  {
 
         body.put("MerchantID",merchantId);
         body.put("PaymentType",paymentType);
         body.put("ChoosePayment",choosePayment);
-        body.put("ReturnURL",returnURL);
         body.put("EncryptType",encryptType);
-        body.put("OrderResultURL",orderResultURL);
+
 
         log.info("{} ",body.entrySet());
 

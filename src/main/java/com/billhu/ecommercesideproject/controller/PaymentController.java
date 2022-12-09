@@ -22,8 +22,10 @@ public class PaymentController {
 
 
     @GetMapping(value = "/payment/{MerchantTradeNo}")
-    public String checkOut(@PathVariable(value = "MerchantTradeNo") String merchantTradeNo,Model model){
-        paymentLogic.payment(merchantTradeNo,model);
+    public String checkOut(HttpServletRequest request, @PathVariable(value = "MerchantTradeNo") String merchantTradeNo,Model model){
+        String serverPath= request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+
+        paymentLogic.payment(merchantTradeNo,serverPath,model);
         return "payment";
     }
 
@@ -68,6 +70,38 @@ public class PaymentController {
 
 
         return "paymentfail";
+
+    }
+
+    @RequestMapping("/payment/return")
+    @ResponseBody
+    public String paymentAsynReturn(HttpServletRequest request){
+        log.info("inside to payment return");
+
+        StringBuilder bodyString =new StringBuilder();
+        Map<String,String> body =new HashMap<>();
+
+        try {
+            bodyString.append(request.getReader().lines().collect(Collectors.joining()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        log.info("body {}",bodyString.toString());
+        String[] array1 = bodyString.toString().split("&");
+        for(int i=0;i<array1.length;i++){
+            String[] array2=array1[i].split("=");
+            if(array2.length!=2){
+                continue;
+            }
+            body.put(array2[0],array2[1]);
+
+        }
+
+        log.info("body {}",body.toString());
+
+        return "ok";
 
     }
 }

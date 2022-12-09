@@ -50,7 +50,7 @@ public class PaymentImpl implements PaymentLogic {
     }
 
     @Override
-    public void payment(String orderId, Model model) {
+    public void payment(String orderId,String serverPath, Model model) {
         //find orders and orderitem  table
         OrdersEntity orders= ordersMapper.findByOrderId(orderId);
         List<OrderItemEntity> ordersItemList= orderItemMapper.findByOrderId(orderId);
@@ -103,6 +103,8 @@ public class PaymentImpl implements PaymentLogic {
         requestBody.put("TotalAmount",total);
         requestBody.put("TradeDesc",tradeDesc);
         requestBody.put("ItemName" ,buyItems.toString());
+        requestBody.put("OrderResultURL" ,serverPath+"/payment/result");
+        requestBody.put("ReturnURL",serverPath+"/payment/return");
 
         requestBody = ecPayService.creatingOrder(requestBody);
 
