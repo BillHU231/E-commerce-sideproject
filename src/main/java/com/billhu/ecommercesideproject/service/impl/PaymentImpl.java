@@ -102,8 +102,8 @@ public class PaymentImpl implements PaymentLogic {
         requestBody.put("MerchantTradeDate",merchantTradeDate);
         requestBody.put("TotalAmount",total);
         requestBody.put("TradeDesc",tradeDesc);
-        requestBody.put("ItemName" ,buyItems.toString());
         requestBody.put("OrderResultURL" ,serverPath+"/payment/result");
+        requestBody.put("ItemName" ,buyItems.toString());
         requestBody.put("ReturnURL",serverPath+"/payment/return");
 
         requestBody = ecPayService.creatingOrder(requestBody);

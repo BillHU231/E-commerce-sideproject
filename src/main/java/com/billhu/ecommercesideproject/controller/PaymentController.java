@@ -88,18 +88,18 @@ public class PaymentController {
         }
 
 
-        log.info("body {}",bodyString.toString());
-        String[] array1 = bodyString.toString().split("&");
-        for(int i=0;i<array1.length;i++){
-            String[] array2=array1[i].split("=");
-            if(array2.length!=2){
-                continue;
-            }
-            body.put(array2[0],array2[1]);
-
-        }
-
-        log.info("body {}",body.toString());
+        log.info(" Asyn body {}",bodyString.toString());
+//        String[] array1 = bodyString.toString().split("&");
+//        for(int i=0;i<array1.length;i++){
+//            String[] array2=array1[i].split("=");
+//            if(array2.length!=2){
+//                continue;
+//            }
+//            body.put(array2[0],array2[1]);
+//
+//        }
+//
+//        log.info("body {}",body.toString());
 
         return "ok";
 

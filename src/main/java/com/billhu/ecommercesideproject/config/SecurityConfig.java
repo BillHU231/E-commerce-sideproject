@@ -44,7 +44,6 @@ public class SecurityConfig  {
           .antMatchers("/ping").permitAll()
           .antMatchers("/login/ping").permitAll()
           .antMatchers("/payment/**").permitAll() //進入付款頁面不驗證
-          .antMatchers("/robots933456.txt").permitAll() //azure container ping
           .antMatchers(HttpMethod.POST,"/user/**").permitAll() //定義那些路徑不須驗譖
           .antMatchers("/").permitAll()
           .antMatchers(AUTH_WHITELIST).permitAll()
