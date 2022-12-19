@@ -50,6 +50,8 @@ public class CustomerLogicImpl implements CustomerLogic {
     @Autowired
     OrderItemMapper ordersItemMapper;
     @Autowired
+    OrderNumUtil orderNumUtil;
+    @Autowired
     ECPayService ecPayService;
     @Autowired
     ResourceLoader resourceLoader;
@@ -201,7 +203,11 @@ public class CustomerLogicImpl implements CustomerLogic {
 
         OrdersEntity orderEntity = new OrdersEntity();
 
-        String orderId=OrderNumUtil.generateOrderNum();
+        //生成order id
+
+        String orderId=orderNumUtil.generateOrderNum();
+
+        log.info("orderID {} ",orderId);
 
         orderEntity.setOrderId(orderId);
         orderEntity.setCustomerUserId(customerId);
