@@ -1,6 +1,7 @@
 package com.billhu.ecommercesideproject.controller;
 
 import com.billhu.ecommercesideproject.service.PaymentLogic;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,8 @@ public class PaymentController {
 
     }
 
+
+    @Hidden //在swagger 隱藏
     @RequestMapping("/payment/return")
     @ResponseBody
     public String paymentAsynReturn(HttpServletRequest request){

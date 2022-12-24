@@ -18,5 +18,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
         bearerFormat = "JWT",
         in = SecuritySchemeIn.HEADER,
         description = "bearer-key jwt token access")
+
 public class OpenAPIConfig {
 }

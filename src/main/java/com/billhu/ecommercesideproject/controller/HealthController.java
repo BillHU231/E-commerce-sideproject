@@ -1,6 +1,7 @@
 package com.billhu.ecommercesideproject.controller;
 
 import com.billhu.ecommercesideproject.util.JwtTokenUtil;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -33,6 +34,7 @@ public class HealthController {
         log.error("Hello");
         return "pong";
     }
+    @Hidden
     @GetMapping("/")
     public String hreoKuHealth(){
         return "pong";

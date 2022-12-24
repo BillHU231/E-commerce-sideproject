@@ -72,7 +72,7 @@ public class CustomerController {
             @ApiResponse(responseCode = "400",description = "invalid parameters received")
     })
     @PostMapping("/{customer-id}/buy/product")
-    public ResponseEntity<BuyProductResponseDTO> butProduct(@RequestBody @Valid BuyProductRequestModel model,
+    public ResponseEntity<BuyProductResponseDTO> buyProduct(@RequestBody @Valid BuyProductRequestModel model,
                                                             @PathVariable(name = "customer-id") Integer customerId,
                                                             BindingResult bindingResult,
                                                             HttpServletRequest request){

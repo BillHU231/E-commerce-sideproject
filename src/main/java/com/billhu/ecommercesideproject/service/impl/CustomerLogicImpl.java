@@ -161,29 +161,32 @@ public class CustomerLogicImpl implements CustomerLogic {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        List<Integer> shoppingCart = model.getShoppingCartItems();
+        List<Integer> inputShoppingCart = new ArrayList<>(model.getShoppingCartItems());
+        List<Integer> shoppingCart =new ArrayList<>(model.getShoppingCartItems());
         List<Integer> canNotBuy = new ArrayList<>();
 
         StringBuilder buyItemsName = new StringBuilder();
 
         BigDecimal total = new BigDecimal(0);
+        int cartSize=inputShoppingCart.size();
 
-        for (int i = 0; i < shoppingCart.size(); i++) {
+        for (int i = 0; i < cartSize; i++) {
 
-            Integer productId = shoppingCart.get(i);
+            Integer productId = inputShoppingCart.get(i);
 
             ProductEntity product = productMapper.findByStoreIdAndProductId(storeId, productId);
 
             //找不到商品
             if (product == null) {
+                log.info(" can not find product {} ",productId);
                 canNotBuy.add(productId);
-                shoppingCart.remove(i);
+                shoppingCart.remove(productId);
                 continue;
             }
             //product 庫存不足
             if (product.getQuantity() <= 0) {
                 canNotBuy.add(productId);
-                shoppingCart.remove(i);
+                shoppingCart.remove(productId);
                 continue;
             }
 
@@ -198,6 +201,16 @@ public class CustomerLogicImpl implements CustomerLogic {
         //建立order table
 
         log.info("total count {} ", total);
+
+        if(total.compareTo(new BigDecimal(0))==0 || shoppingCart.size()==0){
+            response.setStoreId(model.getStoreId());
+            response.setShoppingCartItems(model.getShoppingCartItems());
+            response.setStatus("9002");
+            response.setMessage("Can't find any product ");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        }
 
 
 
