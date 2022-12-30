@@ -4,8 +4,8 @@
 # Demo
 *  [Demo url](https://bill-webapp.herokuapp.com/swagger-ui/index.html) 
 *  測試帳密 
- ＊＊user: asbill920166@gmail.com
- ** password : asbill920166
+> * user: asbill920166@gmail.com
+> * password : asbill920166
 
 # 專案未來展望
 * 新增 uni test
