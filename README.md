@@ -1,6 +1,6 @@
 # E-commerce-side project
 # 簡介
-此side project 利用Spring Security + JWT Token 來實現身份認證的電商 API，可以使用此API 來購買平台產品，並串接綠屆金流來完成付款
+此project為電商購物Api，可以在上面註冊會員，利用token認證來登入此電商平台，串接綠界來實現購物支付功能
 # Demo
 *  [Demo url](https://bill-webapp.herokuapp.com/swagger-ui/index.html) 
 
