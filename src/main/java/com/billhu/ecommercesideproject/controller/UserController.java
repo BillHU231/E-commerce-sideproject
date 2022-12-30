@@ -17,10 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
 
 
 @Tag(name = "user-controller",description = "user 控制項")
@@ -46,7 +48,7 @@ public class UserController {
            @RequestBody @Valid UserRequestModel requestBody,
            BindingResult bindingResult) {  // BindingResult  為 validated 檢查的錯誤訊息
 
-        String[] identityArray={"reseller","customer"};
+        String[] identityArray={"store","customer"};
         UserResponseDTO response =new UserResponseDTO();
         String message =null;
         String status =null;

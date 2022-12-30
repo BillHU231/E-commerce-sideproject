@@ -7,6 +7,7 @@ import com.billhu.ecommercesideproject.model.QueryStoreResponseDTO;
 import com.billhu.ecommercesideproject.service.CustomerLogic;
 import com.billhu.ecommercesideproject.service.impl.ECPayService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,7 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -58,7 +58,7 @@ public class CustomerController {
             @ApiResponse(responseCode = "400",description = "invalid parameters received")
     })
     @GetMapping("/{store-id}/query/product")
-    public  ResponseEntity<QueryProductResponseDTO> queryProduct(@PathVariable(name = "store-id") Integer storeId)
+    public  ResponseEntity<QueryProductResponseDTO> queryProduct(@Schema(description = "店家ID",example = "20003") @PathVariable(name = "store-id") Integer storeId)
     {
         return customerLogic.queryProduct(storeId);
     }
@@ -73,7 +73,7 @@ public class CustomerController {
     })
     @PostMapping("/{customer-id}/buy/product")
     public ResponseEntity<BuyProductResponseDTO> buyProduct(@RequestBody @Valid BuyProductRequestModel model,
-                                                            @PathVariable(name = "customer-id") Integer customerId,
+                                                            @Schema(description = "客戶ID",example = "30002") @PathVariable(name = "customer-id") Integer customerId,
                                                             BindingResult bindingResult,
                                                             HttpServletRequest request){
         BuyProductResponseDTO response=new BuyProductResponseDTO();

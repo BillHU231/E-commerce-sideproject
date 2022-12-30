@@ -1,16 +1,9 @@
 package com.billhu.ecommercesideproject.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 //@Getter
@@ -20,13 +13,17 @@ import java.math.BigDecimal;
 public class ProductItemModel {
 
 
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)  //swagger3 只能讀取不能寫入此參數
+    @Schema(description = "商品ID",example = "40001",accessMode = Schema.AccessMode.READ_ONLY)  //swagger3 只能讀取不能寫入此參數
     private  Integer productId;
 
+    @Schema(description = "商品名稱",example = "【Philips 飛利浦】沙龍級護髮水潤負離子專業吹風機(HP8232)")
     private String product;
 
+
+    @Schema(description = "販售價格",example = "4000")
     private BigDecimal price;
 
+    @Schema(description = "庫存數量",example = "1000")
     private Integer quantity;
 
     public void setProductId(Integer productId) {

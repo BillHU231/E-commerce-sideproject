@@ -6,6 +6,7 @@ import com.billhu.ecommercesideproject.model.DeleteProductRequestModel;
 import com.billhu.ecommercesideproject.model.DeleteProductResponseDTO;
 import com.billhu.ecommercesideproject.service.StoreLogic;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -19,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 @Tag(name = "store-Controller",description = "經銷商控制項")
 @RestController
 @RequestMapping("/store")
@@ -38,7 +40,7 @@ public class StoreController {
 
     })
     @PostMapping("/{store-id}/create/product")
-    public ResponseEntity<CreateProductResponseDTO> createProduct(@PathVariable(name = "store-id") Integer storeId,
+    public ResponseEntity<CreateProductResponseDTO> createProduct(@Schema(description = "店家ID",example = "20001") @PathVariable(name = "store-id") Integer storeId,
                                                                   @RequestBody @Valid CreateProductRequestModel model,
                                                                   BindingResult result) {
         CreateProductResponseDTO response = new CreateProductResponseDTO();
@@ -65,7 +67,7 @@ public class StoreController {
 
     })
     @DeleteMapping("/{store-id}/delete/product")
-    private ResponseEntity<DeleteProductResponseDTO> deleteProduct(@PathVariable(name = "store-id") Integer storeId,
+    private ResponseEntity<DeleteProductResponseDTO> deleteProduct(@Schema(description = "店家ID",example = "20001") @PathVariable(name = "store-id") Integer storeId,
                                                                    @RequestBody@ Valid DeleteProductRequestModel model,
                                                                    BindingResult bindingResult)
     {

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+
 @Tag(name = "Health",description = "services for health")
 @RestController
 @SecurityRequirement(name ="bearer-key" )
