@@ -3,6 +3,9 @@
 此project為電商購物Api，可以在上面註冊會員，利用token認證來登入此電商平台，串接綠界來實現購物支付功能
 # Demo
 *  [Demo url](https://bill-webapp.herokuapp.com/swagger-ui/index.html) 
+*  測試帳密 
+ ＊＊user: asbill920166@gmail.com
+ ** password : asbill920166
 
 # 專案未來展望
 * 新增 uni test
