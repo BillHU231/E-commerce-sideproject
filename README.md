@@ -14,9 +14,14 @@
 ## 資料庫
 - MySQL 8.028
 ## 框架
-- Spring Boot 2.75
+- Spring Boot 
+- Spring Security
+## 串接資料庫技術
+- My Batis
 ## 其餘技術
-- My batis
+- JJWT
+- thymeleaf
 - lombok
 - logback
+- swagger
  
