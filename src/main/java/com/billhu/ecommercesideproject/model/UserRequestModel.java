@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 public class UserRequestModel {
-    @Schema(description = "註冊身份（store or customer）",example = "僅可選擇輸入store或customer")
+    @Schema(description = "註冊身份（store or customer）",example = "僅可選擇輸入reseller或customer")
     @NotBlank(message = "identity can not be null !")
     private String identity;
     @Schema(description = "用戶名稱",example = "BillHU")

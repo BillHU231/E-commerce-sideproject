@@ -48,7 +48,7 @@ public class UserController {
            @RequestBody @Valid UserRequestModel requestBody,
            BindingResult bindingResult) {  // BindingResult  為 validated 檢查的錯誤訊息
 
-        String[] identityArray={"store","customer"};
+        String[] identityArray={"reseller","customer"};
         UserResponseDTO response =new UserResponseDTO();
         String message =null;
         String status =null;
