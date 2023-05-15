@@ -31,7 +31,8 @@
                 <fileNamePattern>./logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
             </springProfile>
             <springProfile name="heroku">
-                <fileNamePattern>/app/logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <fileNamePattern>./logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <!--<fileNamePattern>/app/logs/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>-->
             </springProfile>
         </rollingPolicy>
 
