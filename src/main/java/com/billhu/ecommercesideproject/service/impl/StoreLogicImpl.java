@@ -4,6 +4,7 @@ import com.billhu.ecommercesideproject.controller.StoreController;
 import com.billhu.ecommercesideproject.dao.entity.ProductEntity;
 import com.billhu.ecommercesideproject.dao.entity.StoreUserEntity;
 import com.billhu.ecommercesideproject.dao.mapper.ProductMapper;
+import com.billhu.ecommercesideproject.dao.mapper.SequenceMapper;
 import com.billhu.ecommercesideproject.dao.mapper.StoreUserMapper;
 import com.billhu.ecommercesideproject.model.*;
 import com.billhu.ecommercesideproject.service.StoreLogic;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.sound.midi.Sequence;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -25,6 +27,8 @@ public class StoreLogicImpl implements StoreLogic {
     StoreUserMapper storeUserMapper;
     @Autowired
     ProductMapper productMapper;
+    @Autowired
+    SequenceMapper sequenceMapper;
 
     @Override
     public ResponseEntity<CreateProductResponseDTO> createProduct(Integer storeId, CreateProductRequestModel model) {
@@ -52,8 +56,10 @@ public class StoreLogicImpl implements StoreLogic {
         List<ProductItemModel> productItems =model.getProductItems();
 
         for(ProductItemModel product: productItems){
-            ProductEntity productEntity = new ProductEntity();
 
+            Integer productId= sequenceMapper.generateID("ProductID");
+            ProductEntity productEntity = new ProductEntity();
+            productEntity.setProductId(productId);
             productEntity.setStoreUserId(storeId);
             productEntity.setProductName(product.getProduct());
             productEntity.setProductPrice(product.getPrice());
@@ -61,10 +67,9 @@ public class StoreLogicImpl implements StoreLogic {
             productEntity.setIsEnble(1);
 
             productMapper.createProduct(productEntity);
-            product.setProductId(productEntity.getProductId());
 
-
-
+            //response 時要有 product Id
+            product.setProductId(productId);
            log.info("insert product {} ",product.toString());
         }
 

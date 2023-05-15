@@ -7,9 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface CustomerUserMapper {
-    @Insert("INSERT INTO customer_user(user_id,customer_name) " +
-            " VALUES (#{userId}, #{customerName})")
-    @SelectKey(keyProperty = "customerUserId",keyColumn = "customer_user_id",resultType = Integer.class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
+//    @SelectKey(keyProperty = "customerUserId",keyColumn = "customer_user_id",resultType = Integer.class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
+
+    @Insert("INSERT INTO customer_user(customer_user_id,user_id,customer_name) " +
+            " VALUES (#{customerUserId},#{userId}, #{customerName})")
     public void create (CustomerUserEntity entity);
 
     @Select({"SELECT * FROM customer_user " +

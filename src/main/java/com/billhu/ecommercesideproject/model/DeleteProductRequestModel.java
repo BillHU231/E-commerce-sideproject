@@ -18,7 +18,7 @@ public class DeleteProductRequestModel {
     @Schema(description = "店家名稱",example = "PChome")
     @NotBlank(message = "storeName can not null")
     private String storeName ;
-    @Schema(description = "刪除商品id",example = "40002,40003(可多選）")
+    @Schema(description = "刪除商品id",example = "[40002,40003]")
     @NotNull(message = "productItems can not null")
     private List<Integer> productItems;
 }

@@ -217,7 +217,6 @@ public class CustomerLogicImpl implements CustomerLogic {
         OrdersEntity orderEntity = new OrdersEntity();
 
         //生成order id
-
         String orderId=orderNumUtil.generateOrderNum();
 
         log.info("orderID {} ",orderId);

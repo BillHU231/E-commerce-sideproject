@@ -16,9 +16,9 @@ public interface UserMapper {
      * @SelectKey insert date 查詢db自動生成的id  ， keyColumn =>對應db 欄位  keyProperty => 對應 entity 參數  resultType=> 回傳type before=>執行insert 前或後執行 statement=>要執行得sql語法
      *參考 https://blog.csdn.net/Wangdiankun/article/details/106461414
      */
-    @SelectKey( keyColumn = "user_id",keyProperty = "userId",resultType = Integer.class,before = false ,statement = "SELECT LAST_INSERT_ID()")
-    @Insert("INSERT INTO users(user_mail,user_password,user_type,create_time,modify_time) " +
-            " VALUES (#{userMail},#{userPassword},#{userType},#{createTime},#{modifyTime} ) ")
+//    @SelectKey( keyColumn = "user_id",keyProperty = "userId",resultType = Integer.class,before = false ,statement = "SELECT LAST_INSERT_ID()")
+    @Insert("INSERT INTO users(user_id,user_mail,user_password,user_type,create_time,modify_time) " +
+            " VALUES (#{userId},#{userMail},#{userPassword},#{userType},#{createTime},#{modifyTime} ) ")
     public void create (UserEntity user);
     @Select("SELECT * FROM users " +
             "WHERE user_mail = #{mail} AND user_password = #{password}")

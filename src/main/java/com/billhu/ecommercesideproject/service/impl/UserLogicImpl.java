@@ -1,5 +1,6 @@
 package com.billhu.ecommercesideproject.service.impl;
 
+import com.billhu.ecommercesideproject.dao.mapper.SequenceMapper;
 import com.billhu.ecommercesideproject.util.JwtTokenUtil;
 import com.billhu.ecommercesideproject.dao.entity.CustomerUserEntity;
 import com.billhu.ecommercesideproject.dao.entity.StoreUserEntity;
@@ -39,6 +40,9 @@ public class UserLogicImpl implements UserLogic {
     @Autowired
     JwtTokenUtil tokenUtil;
 
+    @Autowired
+    SequenceMapper sequenceMapper;
+
     /**
      * @Transactional 交易控制  propagationg事件的傳播行為  rollbackFor 發生什麼錯誤rollback
      *參考資料 https://www.796t.com/content/1547149023.html
@@ -70,9 +74,12 @@ public class UserLogicImpl implements UserLogic {
         //利用MD5加密密碼
         String passWord= DigestUtils.md5DigestAsHex(model.getPassWord().getBytes());
 
-        //insert user
+        //產生 userId
+        Integer userId = sequenceMapper.generateID("UserID");
 
+        //insert user
         UserEntity userEntity =new UserEntity();
+        userEntity.setUserId(userId);
         userEntity.setUserMail(model.getUserMail());
         userEntity.setUserPassword(passWord);
         userEntity.setUserType(model.getIdentity());
@@ -83,11 +90,13 @@ public class UserLogicImpl implements UserLogic {
         userMapper.create(userEntity);
         log.info("user id {}",userEntity.getUserId());
 
-        long userId = 0L;
+
 
         if("reseller".equals(userEntity.getUserType())){
             log.info("create reseller user ");
+            Integer storeUserId= sequenceMapper.generateID("StoreUserID");
             StoreUserEntity storeUserEntity =new StoreUserEntity();
+            storeUserEntity.setStoreUserId(storeUserId);
             storeUserEntity.setUserId(userEntity.getUserId());
             storeUserEntity.setStoreName(model.getUserName());
             storeUserMapper.create(storeUserEntity);
@@ -96,18 +105,20 @@ public class UserLogicImpl implements UserLogic {
             log.info("store user id {} ",storeUserEntity.getUserId());
         }else {
             log.info("create customer user ");
+            Integer customerUserId =sequenceMapper.generateID("CustomerUserID");
             CustomerUserEntity customerUserEntity =new CustomerUserEntity();
+            customerUserEntity.setCustomerUserId(customerUserId);
             customerUserEntity.setUserId(userEntity.getUserId());
             customerUserEntity.setCustomerName(model.getUserName());
 
              customerUserMapper.create(customerUserEntity);
 
-             userId= customerUserEntity.getCustomerUserId();
+
             log.info("customer user id {} ",customerUserEntity.getUserId());
         }
 
         response.setIdentity(model.getIdentity());
-        response.setUserId(userId);
+        response.setUserId(new Long(userId));
         response.setUserName(model.getUserName());
         response.setUserMail(model.getUserMail());
         response.setPassWord(model.getPassWord());

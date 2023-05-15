@@ -27,7 +27,7 @@ public class OrderNumUtil {
 
         String nowDate= df.format(new Date());
 
-        Integer orderId =sequenceMapper.generateID("orderID");
+        Integer orderId =sequenceMapper.generateID("orderId");
 
         log.info("generateID {}",orderId);
 

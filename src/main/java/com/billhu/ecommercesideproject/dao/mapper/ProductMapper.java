@@ -7,9 +7,9 @@ import java.util.List;
 
 @Mapper
 public interface ProductMapper {
-    @Insert({"INSERT INTO product(store_user_id,product_name,product_price,quantity,is_enble) " +
-            " VALUE (#{storeUserId},#{productName},#{productPrice},#{quantity},#{isEnble}) ;"})
-    @SelectKey(keyProperty = "productId",keyColumn = "product_id",resultType = Integer. class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
+    //    @SelectKey(keyProperty = "productId",keyColumn = "product_id",resultType = Integer. class ,before = false,statement = "SELECT LAST_INSERT_ID() ")
+    @Insert({"INSERT INTO product(product_id,store_user_id,product_name,product_price,quantity,is_enble) " +
+            " VALUE (#{productId},#{storeUserId},#{productName},#{productPrice},#{quantity},#{isEnble}) ;"})
     public void createProduct(ProductEntity entity);
 
     @Delete({"DELETE FROM product " +
