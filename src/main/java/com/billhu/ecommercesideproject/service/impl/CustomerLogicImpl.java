@@ -284,4 +284,29 @@ public class CustomerLogicImpl implements CustomerLogic {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @Override
+    public ResponseEntity<QueryCustomerResponseDTO> queryCustomer() {
+
+        List<CustomerUserEntity> entityList= customerUserMapper.findAll();
+        List<CustomerItemsModel> customerItemsList = new ArrayList<>();
+        QueryCustomerResponseDTO response = new QueryCustomerResponseDTO();
+
+        for(CustomerUserEntity entity : entityList){
+            CustomerItemsModel model = new CustomerItemsModel();
+            model.setCustomerId(Integer.toString(entity.getCustomerUserId()));
+            model.setCustomerName(entity.getCustomerName());
+
+            customerItemsList.add(model);
+
+        }
+
+
+        //response
+        response.setCustomerTotalCount(entityList.size());
+        response.setCustomerItems(customerItemsList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
+    }
 }

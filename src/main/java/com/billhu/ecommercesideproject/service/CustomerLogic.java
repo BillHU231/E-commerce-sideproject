@@ -1,9 +1,6 @@
 package com.billhu.ecommercesideproject.service;
 
-import com.billhu.ecommercesideproject.model.BuyProductRequestModel;
-import com.billhu.ecommercesideproject.model.BuyProductResponseDTO;
-import com.billhu.ecommercesideproject.model.QueryProductResponseDTO;
-import com.billhu.ecommercesideproject.model.QueryStoreResponseDTO;
+import com.billhu.ecommercesideproject.model.*;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 
@@ -16,6 +13,8 @@ public interface CustomerLogic {
     public  ResponseEntity<QueryProductResponseDTO> queryProduct(Integer storeId);
 
     public ResponseEntity<BuyProductResponseDTO> buyProduct(Integer customerId, BuyProductRequestModel model, HttpServletRequest request);
+
+    public ResponseEntity<QueryCustomerResponseDTO> queryCustomer();
 
 
 }

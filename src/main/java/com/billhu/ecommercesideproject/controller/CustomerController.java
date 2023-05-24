@@ -1,9 +1,6 @@
 package com.billhu.ecommercesideproject.controller;
 
-import com.billhu.ecommercesideproject.model.BuyProductRequestModel;
-import com.billhu.ecommercesideproject.model.BuyProductResponseDTO;
-import com.billhu.ecommercesideproject.model.QueryProductResponseDTO;
-import com.billhu.ecommercesideproject.model.QueryStoreResponseDTO;
+import com.billhu.ecommercesideproject.model.*;
 import com.billhu.ecommercesideproject.service.CustomerLogic;
 import com.billhu.ecommercesideproject.service.impl.ECPayService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -91,6 +88,21 @@ public class CustomerController {
         }
 
         return customerLogic.buyProduct(customerId,model,request);
+
+
+    }
+
+    @Operation(summary = "查詢所有使用者")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "select customer user success"),
+            @ApiResponse(responseCode = "403", description = "You are not Authorised"),
+            @ApiResponse(responseCode = "401", description = "Access token is Expired"),
+            @ApiResponse(responseCode = "400",description = "invalid parameters received")
+    })
+    @GetMapping("/query/customer")
+    public ResponseEntity<QueryCustomerResponseDTO> queryCustomer(){
+
+        return customerLogic.queryCustomer();
 
 
     }

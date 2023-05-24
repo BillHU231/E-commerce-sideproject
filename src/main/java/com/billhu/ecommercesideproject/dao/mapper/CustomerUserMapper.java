@@ -21,4 +21,12 @@ public interface CustomerUserMapper {
             @Result(property = "customerName",column = "customer_name")
     })
     public List<CustomerUserEntity> findById(@Param(value = "id") Integer customerId);
+
+    @Select({"SELECT * FROM customer_user ;"})
+    @Results({
+            @Result(property = "customerUserId",column = "customer_user_id"),
+            @Result(property = "userId",column = "user_id"),
+            @Result(property = "customerName",column = "customer_name")
+    })
+    public List<CustomerUserEntity> findAll ();
 }
