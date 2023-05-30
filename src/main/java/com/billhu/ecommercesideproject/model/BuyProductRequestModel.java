@@ -17,7 +17,7 @@ public class BuyProductRequestModel {
     @Schema(description = "商店ID",example = "20003")
     @NotNull(message = "storeId can not be null")
     private Integer storeId;
-    @Schema(description = "購買商品ID",example = "[40012,40015]")
+    @Schema(description = "購買商品ID",example = "[40021,40022,40023]")
     @NotNull(message = "shopping cart can not be null")
     private List<Integer> shoppingCartItems;
 }

@@ -70,7 +70,7 @@ public class CustomerController {
     })
     @PostMapping("/{customer-id}/buy/product")
     public ResponseEntity<BuyProductResponseDTO> buyProduct(@RequestBody @Valid BuyProductRequestModel model,
-                                                            @Schema(description = "客戶ID",example = "30002") @PathVariable(name = "customer-id") Integer customerId,
+                                                            @Schema(description = "客戶ID",example = "30003") @PathVariable(name = "customer-id") Integer customerId,
                                                             BindingResult bindingResult,
                                                             HttpServletRequest request){
         BuyProductResponseDTO response=new BuyProductResponseDTO();

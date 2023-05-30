@@ -12,11 +12,11 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @ToString
 public class LoginRequestModel {
-    @Schema(description = "用戶mail",example = "amy@gmail.com")
+    @Schema(description = "用戶mail",example = "pchome@gmail.com")
     @NotBlank(message = "userName can not be null")
     @Email
     private String userMail;
-    @Schema(description = "用戶密碼",example = "amy")
+    @Schema(description = "用戶密碼",example = "pchome")
     @NotBlank(message = "password can not be null")
     private  String passWord;
 }
