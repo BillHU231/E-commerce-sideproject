@@ -2,7 +2,7 @@
 # 簡介
 此project為電商購物Api，可以在上面註冊會員，利用token認證來登入此電商平台，串接綠界來實現購物支付功能
 # Demo
-*  [Demo url](https://billhu-webapp.herokuapp.com/swagger-ui/index.html) 
+*  [Demo url](https://billhu-webapp-f45894c8e5af.herokuapp.com/swagger-ui/index.html) 
 *  測試帳密 
 > * user: amy@gmail.com
 > * password : amy
